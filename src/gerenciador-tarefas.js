@@ -1,10 +1,15 @@
 import React from 'react';
 import './gerenciador-tarefas.css';
+import { useRoutes } from 'hookrouter';
+
+const routes = {
+  '/': () => <ListarTarefas />,
+  '/cadastrar': () => <CadastrarTarefa />,
+  '/atualizar/:id': ({id}) => <AtulaizarTarefa />
+}
 
 function GerenciadorTarefas() {
-  return (
-    <h1>Gerenciador de tarefas</h1>
-  );
+  return useRoutes(routes);
 }
 
 export default GerenciadorTarefas;
