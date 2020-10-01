@@ -5,7 +5,7 @@ import ListarTarefas from '../listar/listar-tarefas';
 describe('Teste do componente de listagem de tarefas', () => {
     test('Deve renderizar o componente corretamente', () => {
         const { getByText } = render(<ListarTarefas />);
-        const linkElement = getByText(/Listagem de Tarefas/i);
+        const linkElement = getByText(/Tarefas a fazer/i);
         expect(linkElement).toBeInTheDocument();
     });
 });

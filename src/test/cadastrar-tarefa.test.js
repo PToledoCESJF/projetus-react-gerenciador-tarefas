@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 describe('Teste do componente de cadastro de tarefa', () => {
     test('Deve renderizar o componente corretamente', () => {
         const { getByText } = render(<CadastrarTarefa />);
-        const linkElement = getByText(/Cadastrar Tarefa/i);
+        const linkElement = getByText(/Cadastrar tarefa/i);
         expect(linkElement).toBeInTheDocument();
     });
 
