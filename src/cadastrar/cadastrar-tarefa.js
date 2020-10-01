@@ -43,7 +43,7 @@ function CadastrarTarefa() {
                         <Form.Label>Tarefa</Form.Label>
                         <Form.Control
                         type="text" placeholder="Digite a tarefa" minLength="5" maxLength="100" 
-                        required value={tarefa} onChange={handleTxtTarefa} />
+                        required value={tarefa} onChange={handleTxtTarefa} data-testid="txt-tarefa" />
                         <Form.Control.Feedback type="invalid">
                             A tarefa deve conter no mínimo 5 e no máximo 100 caracteres.
                         </Form.Control.Feedback>
@@ -58,7 +58,7 @@ function CadastrarTarefa() {
                 </Form>
                 <Modal show={exibirModal} onHide={handleFecharModal}>
                     <Modal.Header closeButton><Modal.Title>Sucesso</Modal.Title></Modal.Header>
-                    <Modal.Body>Tarefa adicionada com sucesso</Modal.Body>
+                    <Modal.Body>Tarefa adicionada com sucesso!</Modal.Body>
                     <Modal.Footer><Button variant="success" onClick={handleFecharModal}>Continuar</Button></Modal.Footer>
 
                 </Modal>
