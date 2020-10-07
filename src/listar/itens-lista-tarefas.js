@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { A } from 'hookrouter';
-import ConcluirTarefa from '../listar/concluir-tarefa';
-
+import ConcluirTarefa from './concluir-tarefa';
+import RemoverTarefa from './remover-tarefa';
 
 function ItensListaTarefas(props){
 
@@ -12,7 +12,6 @@ function ItensListaTarefas(props){
         return tarefa.concluida ? 'line-through' : 'none';
     }
 
-    
     return(
         props.tarefas.map(tarefa => 
             <tr key={tarefa.id} data-testid="tarefa">
@@ -30,6 +29,11 @@ function ItensListaTarefas(props){
                         className={tarefa.concluida ? 'hidden' : 'btn btn-warning btn-sn'}>
                     <FontAwesomeIcon icon={faEdit} />
                     </A>
+                    &nbsp;
+                    <RemoverTarefa
+                        tarefa={tarefa}
+                        recarregarTarefas={props.recarregarTarefas}
+                    />
                 </td>
             </tr>
         )
