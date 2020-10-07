@@ -3,25 +3,36 @@ import { A } from 'hookrouter';
 import { Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
 import ItensListaTarefas from './itens-lista-tarefas';
+import Paginacao from './paginacao';
 
 function ListarTarefas() {
 
+    const ITENS_POR_PAG = 3;
+
     const [tarefas, setTarefas] = useState([]);
-    const [carregarTarefas, setCarregarTarefas] = useState(true)
+    const [carregarTarefas, setCarregarTarefas] = useState(true);
+    const [totalItems, setTotalItens] = useState(0);
+    const [paginaAtual, setPaginaAtual] = useState(1);
 
     useEffect(() => {
         function obterTarefas() {
             const tarefasDb = localStorage['tarefas'];
-            let listarTarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
-            setTarefas(listarTarefas);
+            let listaTarefas = tarefasDb ? JSON.parse(tarefasDb) : [];
+            setTarefas(listaTarefas.splice((paginaAtual - 1) * ITENS_POR_PAG, ITENS_POR_PAG));
+            setTarefas(listaTarefas);
         }
-        if (carregarTarefas){
+        if (carregarTarefas) {
             obterTarefas();
             setCarregarTarefas(false);
         }
-    }, [carregarTarefas]);
+    }, [carregarTarefas, paginaAtual]);
+
+    function handleMudarPagina(pagina) {
+        setPaginaAtual(pagina);
+        setCarregarTarefas(true);
+      }
+    
 
     return (
         <div className="text-center">
@@ -42,11 +53,16 @@ function ListarTarefas() {
                     </tr>
                 </thead>
                 <tbody>
-                    <ItensListaTarefas 
+                    <ItensListaTarefas
                         tarefas={tarefas}
                         recaregarTarefas={setCarregarTarefas} />
                 </tbody>
             </Table>
+            <Paginacao
+                totalItems={totalItems}
+                itemsPorPagina={ITENS_POR_PAG}
+                paginaAtual={paginaAtual}
+                mudarPagina={handleMudarPagina} />
         </div>
     );
 }
